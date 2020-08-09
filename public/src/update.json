@@ -1,0 +1,23 @@
+{
+    "update_id": 429675015,
+    "message": {
+        "message_id": 444,
+        "from": {
+            "id": 197256155,
+            "is_bot": false,
+            "first_name": "Sherzodbek",
+            "last_name": "\ud83e\udd82",
+            "username": "esanov98",
+            "language_code": "en"
+        },
+        "chat": {
+            "id": 197256155,
+            "first_name": "Sherzodbek",
+            "last_name": "\ud83e\udd82",
+            "username": "esanov98",
+            "type": "private"
+        },
+        "date": 1593628444,
+        "text": "\ud83d\udca8"
+    }
+}

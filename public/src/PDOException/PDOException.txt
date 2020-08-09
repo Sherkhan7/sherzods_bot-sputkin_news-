@@ -1,0 +1,13 @@
+
+
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INSER users (chat_id,is_bot,first_name,last_name,username) VALUES ('197256155','' at line 1
+
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INSER users (chat_id,is_bot,first_name,last_name,username) VALUES ('197256155','' at line 1
+
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INSER users (chat_id,is_bot,first_name,last_name,username) VALUES ('197256155','' at line 1
+
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INT textlog (197256155,d) VALUES ('197256155','d')' at line 1
+
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INT textlog (197256155,fdf) VALUES ('197256155','fdf')' at line 1
+
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '197256155,ff) VALUES ('197256155','ff')' at line 1
