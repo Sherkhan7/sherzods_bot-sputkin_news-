@@ -1,19 +1,19 @@
 <?php
-date_default_timezone_set('Asia/Tashkent');
-
+//date_default_timezone_set('Asia/Tashkent');
 require "menu/menu.php";
-require "config.php";
+
+//require "config.php";
 
 use Telegram\Bot\Api;
 
 $telegram = new Api('1323152064:AAENjtb_1bqm8vKPS_P5UV1QqgKUlRn1Od0');
 //$conn_array = ['localhost', 'u83155_botdb', 'u83155_root', 'hpnotebook'];
 
-$conn = connect('localhost', 'u83155_botdb', 'u83155_root', 'hpnotebook');
-file_put_contents(__DIR__ . '/connection.txt' , json_encode($conn, JSON_PRETTY_PRINT));
+//$conn = connect('localhost', 'u83155_botdb', 'u83155_root', 'hpnotebook');
+//file_put_contents(__DIR__ . '/connection.txt', json_encode($conn, JSON_PRETTY_PRINT));
 
 $update = $telegram->getWebhookUpdates();
-file_put_contents(__DIR__ . '/update.json' , json_encode($update, JSON_PRETTY_PRINT));
+file_put_contents(__DIR__ . '/update.json', json_encode($update, JSON_PRETTY_PRINT));
 
 $chat_id = $update->getMessage()->getChat()->getId();
 $message_id = $update->getMessage()->getMessageId();
@@ -91,49 +91,49 @@ if ($text == "Toshkent" || $text == "Denov" || $text == "Nukus" ||
     ];
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_URL, $url . '?'. http_build_query($options));
+    curl_setopt($ch, CURLOPT_URL, $url . '?' . http_build_query($options));
 
     $weather = json_decode(curl_exec($ch), true);
     $weather_json = json_encode($weather, JSON_PRETTY_PRINT);
     file_put_contents(__DIR__ . '/weather.json', $weather_json);
 
-    $weather_db = get_weather($conn, $weather['weather'][0]['id']);
+//    $weather_db = get_weather($conn, $weather['weather'][0]['id']);
     $reply = "__" . strtoupper($text) . " SHAHRI__" . ":\n*Hisoblangan vaqt:* " . date('d/m/Y, H:i:s', $weather['dt']) . "\n*Havo harorati:* " .
-        $weather_db['icon'] . "\+" . round($weather['main']['temp']) . "\xE2\x84\x83\(" . $weather_db['description'] . "\)" .
-    "\n*O\'xshaydi:* " . "\+". round($weather['main']['feels_like']) . "\xE2\x84\x83" .
-    "\n*Minimum:* " . "\+" . round($weather['main']['temp_min']) . "\xE2\x84\x83" .
-    "\n*Maksimum:* " . "\+" . round($weather['main']['temp_max']) . "\xE2\x84\x83".
-    "\n*Namlik:* " . "\xF0\x9F\x92\xA7 ". $weather['main']['humidity'] . "\%".
-    "\n*Shamol tezligi:* " . "\xF0\x9F\x92\xA8 ". round($weather['wind']['speed']) . " m/s".
-    "\n*Bulutlilik:* " . "\xE2\x98\x81 ". $weather['clouds']['all'] . " \%".
-    "\n*Havo bosimi:* " . round($weather['main']['pressure'] / 1.33322) . ' mmHg';;
-    !is_null($weather['main']['sea_level']) ? $reply.="\n*Havo bosimi \(dengiz sathidan\)*:" . round($weather['main']['sea_level'] / 1.33322) . ' mmHg' : '';
-    !is_null($weather['main']['grnd_level']) ? $reply.="\n*Havo bosimi \(yer sathidan\)*:" . round($weather['main']['grnd_level'] / 1.33322) . ' mmHg' : '';
+        "\+" . round($weather['main']['temp']) . "\xE2\x84\x83\(''\)" .
+        "\n*O\'xshaydi:* " . "\+" . round($weather['main']['feels_like']) . "\xE2\x84\x83" .
+        "\n*Minimum:* " . "\+" . round($weather['main']['temp_min']) . "\xE2\x84\x83" .
+        "\n*Maksimum:* " . "\+" . round($weather['main']['temp_max']) . "\xE2\x84\x83" .
+        "\n*Namlik:* " . "\xF0\x9F\x92\xA7 " . $weather['main']['humidity'] . "\%" .
+        "\n*Shamol tezligi:* " . "\xF0\x9F\x92\xA8 " . round($weather['wind']['speed']) . " m/s" .
+        "\n*Bulutlilik:* " . "\xE2\x98\x81 " . $weather['clouds']['all'] . " \%" .
+        "\n*Havo bosimi:* " . round($weather['main']['pressure'] / 1.33322) . ' mmHg';;
+    !is_null($weather['main']['sea_level']) ? $reply .= "\n*Havo bosimi \(dengiz sathidan\)*:" . round($weather['main']['sea_level'] / 1.33322) . ' mmHg' : '';
+    !is_null($weather['main']['grnd_level']) ? $reply .= "\n*Havo bosimi \(yer sathidan\)*:" . round($weather['main']['grnd_level'] / 1.33322) . ' mmHg' : '';
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'parse_mode' => 'MarkdownV2']);
 
 }
 
 /****************************************************************
-//const  TOKEN = '1038081989:AAHfMUWCUQnqXZX5e-JCztdHM-F0tprPYhA';
-//const BASE_URL = 'https://api.telegram.org/bot' . TOKEN . '/';
-//
-//$update = file_get_contents("php://input");
-//
-//$update = json_decode(file_get_contents("php://input"), true);
-//
-//function sendRequest($method, $params = []) {
-//    $url = BASE_URL . $method . '?' . http_build_query($params);
-//
-//    return json_decode(file_get_contents($url), true);
-//}
-//
-//$chat_id = $update['message']['chat']['id'];
-//$text = $update['message']['text'];
-////
-//$params = [
-//    'chat_id' => $chat_id,
-//    'text' => $text
-//];
-//
-//sendRequest('sendmessage', $params);
-*/
+ * //const  TOKEN = '1038081989:AAHfMUWCUQnqXZX5e-JCztdHM-F0tprPYhA';
+ * //const BASE_URL = 'https://api.telegram.org/bot' . TOKEN . '/';
+ * //
+ * //$update = file_get_contents("php://input");
+ * //
+ * //$update = json_decode(file_get_contents("php://input"), true);
+ * //
+ * //function sendRequest($method, $params = []) {
+ * //    $url = BASE_URL . $method . '?' . http_build_query($params);
+ * //
+ * //    return json_decode(file_get_contents($url), true);
+ * //}
+ * //
+ * //$chat_id = $update['message']['chat']['id'];
+ * //$text = $update['message']['text'];
+ * ////
+ * //$params = [
+ * //    'chat_id' => $chat_id,
+ * //    'text' => $text
+ * //];
+ * //
+ * //sendRequest('sendmessage', $params);
+ */

@@ -1,5 +1,6 @@
 <?php
-function connect() {
+function connect()
+{
 
     $num_args = func_num_args();
 
@@ -18,7 +19,7 @@ function connect() {
 
     } else {
 
-        file_put_contents(__DIR__ .'/PDOException' . '/connection_args.json', json_encode($func_args, JSON_PRETTY_PRINT) . "\n\n");
+        file_put_contents(__DIR__ . '/PDOException' . '/connection_args.json', json_encode($func_args, JSON_PRETTY_PRINT) . "\n\n");
     }
     $host = $func_args[0];
     $dbname = $func_args[1];
@@ -36,14 +37,15 @@ function connect() {
 
         return $conn;
 
-    } catch(PDOException $e) {
-        file_put_contents(__DIR__ .'/PDOException' . '/PDOException.txt' , $e->getMessage() . "\n\n", FILE_APPEND);
+    } catch (PDOException $e) {
+        file_put_contents(__DIR__ . '/PDOException' . '/PDOException.txt', $e->getMessage() . "\n\n", FILE_APPEND);
     }
 
     return null;
 }
 
-function get_user($connection,$chat_id) {
+function get_user($connection, $chat_id)
+{
 
     try {
         $sql = "SELECT * FROM users WHERE chat_id = :chat_id";
@@ -54,20 +56,21 @@ function get_user($connection,$chat_id) {
         return $statement->fetch();
 
     } catch (PDOException $e) {
-        file_put_contents(__DIR__ .'/PDOException' . '/PDOException.txt' , $e->getMessage() . "\n\n" ,FILE_APPEND);
+        file_put_contents(__DIR__ . '/PDOException' . '/PDOException.txt', $e->getMessage() . "\n\n", FILE_APPEND);
     }
 
     return null;
 }
 
-function add_user($connection, array $user_info = []) {
+function add_user($connection, array $user_info = [])
+{
 
     $fields = array_keys($user_info);
     $fields_part = implode(",", $fields);
 
     $params_part = implode(",", array_map(function ($val) {
         return ":$val";
-    },$fields));
+    }, $fields));
 
     try {
         $sql = "INSERT INTO users ($fields_part) VALUES ($params_part)";
@@ -80,12 +83,13 @@ function add_user($connection, array $user_info = []) {
         return $statement->execute();
 
     } catch (PDOException $e) {
-        file_put_contents(__DIR__ .'/PDOException' . '/PDOException.txt' , $e->getMessage() . "\n\n", FILE_APPEND);
+        file_put_contents(__DIR__ . '/PDOException' . '/PDOException.txt', $e->getMessage() . "\n\n", FILE_APPEND);
     }
     return false;
 }
 
-function add_user_textlog($connection, array $user_text_info = []) {
+function add_user_textlog($connection, array $user_text_info = [])
+{
 
     $fields = array_keys($user_text_info);
     $fields_part = implode(",", $fields);
@@ -111,7 +115,7 @@ function add_user_textlog($connection, array $user_text_info = []) {
         return $statement->execute();
 
     } catch (PDOException $e) {
-        file_put_contents(__DIR__ .'/PDOException' . '/PDOException.txt' , $e->getMessage() . "\n\n", FILE_APPEND);
+        file_put_contents(__DIR__ . '/PDOException' . '/PDOException.txt', $e->getMessage() . "\n\n", FILE_APPEND);
     }
 
     return false;
@@ -120,14 +124,15 @@ function add_user_textlog($connection, array $user_text_info = []) {
 /*Weather functions*/
 
 
-function add_weather($connection, array $text_arr = []) {
+function add_weather($connection, array $text_arr = [])
+{
 
     $fields = array_keys($text_arr);
     $fields_part = implode(",", $fields);
 
     $params_part = implode(",", array_map(function ($val) {
         return ":$val";
-    },$fields));
+    }, $fields));
 
     try {
         $sql = "INSERT INTO weather ($fields_part) VALUES ($params_part)";
@@ -140,13 +145,14 @@ function add_weather($connection, array $text_arr = []) {
         return $statement->execute();
 
     } catch (PDOException $e) {
-        file_put_contents(__DIR__ .'/PDOException' . '/PDOException.txt' , $e->getMessage() . "\n\n", FILE_APPEND);
+        file_put_contents(__DIR__ . '/PDOException' . '/PDOException.txt', $e->getMessage() . "\n\n", FILE_APPEND);
     }
 
     return false;
 }
 
-function get_weather($connection,$weather_id) {
+function get_weather($connection, $weather_id)
+{
 
     try {
         $sql = "SELECT * FROM weather WHERE weather_id = :weather_id";
@@ -157,7 +163,7 @@ function get_weather($connection,$weather_id) {
         return $statement->fetch();
 
     } catch (PDOException $e) {
-        file_put_contents(__DIR__ .'/PDOException' . '/PDOException.txt' , $e->getMessage() . "\n\n" ,FILE_APPEND);
+        file_put_contents(__DIR__ . '/PDOException' . '/PDOException.txt', $e->getMessage() . "\n\n", FILE_APPEND);
     }
 
     return null;
