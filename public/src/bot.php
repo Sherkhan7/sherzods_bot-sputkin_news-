@@ -98,18 +98,20 @@ if ($text == "Toshkent" || $text == "Denov" || $text == "Nukus" ||
     file_put_contents(__DIR__ . '/weather.json', $weather_json);
 
 //    $weather_db = get_weather($conn, $weather['weather'][0]['id']);
-    $reply = "__" . strtoupper($text) . " SHAHRI__" . ":\n*Hisoblangan vaqt:* " . date('d/m/Y, H:i:s', $weather['dt']) . "\n*Havo harorati:* " .
-        "\+" . round($weather['main']['temp']) . "\xE2\x84\x83\(''\)" .
-        "\n*O\'xshaydi:* " . "\+" . round($weather['main']['feels_like']) . "\xE2\x84\x83" .
-        "\n*Minimum:* " . "\+" . round($weather['main']['temp_min']) . "\xE2\x84\x83" .
-        "\n*Maksimum:* " . "\+" . round($weather['main']['temp_max']) . "\xE2\x84\x83" .
-        "\n*Namlik:* " . "\xF0\x9F\x92\xA7 " . $weather['main']['humidity'] . "\%" .
-        "\n*Shamol tezligi:* " . "\xF0\x9F\x92\xA8 " . round($weather['wind']['speed']) . " m/s" .
-        "\n*Bulutlilik:* " . "\xE2\x98\x81 " . $weather['clouds']['all'] . " \%" .
-        "\n*Havo bosimi:* " . round($weather['main']['pressure'] / 1.33322) . ' mmHg';;
-    !is_null($weather['main']['sea_level']) ? $reply .= "\n*Havo bosimi \(dengiz sathidan\)*:" . round($weather['main']['sea_level'] / 1.33322) . ' mmHg' : '';
-    !is_null($weather['main']['grnd_level']) ? $reply .= "\n*Havo bosimi \(yer sathidan\)*:" . round($weather['main']['grnd_level'] / 1.33322) . ' mmHg' : '';
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'parse_mode' => 'MarkdownV2']);
+    $reply = "<u>" . strtoupper($text) . " SHAHRI</u>:\n" .
+        "\u{1F551} <b>Hisoblangan vaqt:</b> " . date('d/m/Y, H:i:s', $weather['dt']) . "\n" .
+        "\u{1F321} <b>Havo harorati:</b> " . "+" . round($weather['main']['temp']) . "\xE2\x84\x83\n" .
+        "\u{1F505} <b>O'xshaydi:</b> " . "+" . round($weather['main']['feels_like']) . "\xE2\x84\x83\n" .
+        "\u{1F4C9} <b>Minimum:</b> " . "+" . round($weather['main']['temp_min']) . "\xE2\x84\x83\n" .
+        "\u{1F4C8} <b>Maksimum:</b> " . "+" . round($weather['main']['temp_max']) . "\xE2\x84\x83\n" .
+        "\u{1F4A7} <b>Namlik:</b> " . $weather['main']['humidity'] . "%\n".
+        "\u{1F4A8} <b>Shamol tezligi:</b>". round($weather['wind']['speed']) . " m/s\n" .
+        "\u{2601} <b>Bulutlilik:</b> " . $weather['clouds']['all'] . " %\n" .
+        "\u{26A0} <b>Havo bosimi:</b> " . round($weather['main']['pressure'] / 1.33322) . " mmHg\n";;
+    isset($weather['main']['sea_level']) ? $reply .= "\u{26A0}<b>Havo bosimi (dengiz sathidan):</b> " . round($weather['main']['sea_level'] / 1.33322) . " mmHg\n" : '';
+    isset($weather['main']['grnd_level']) ? $reply .= "\u{26A0}<b>Havo bosimi (yer sathidan):</b> " . round($weather['main']['grnd_level'] / 1.33322) . " mmHg\n" : '';
+
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'parse_mode' => 'HTML']);
 
 }
 
