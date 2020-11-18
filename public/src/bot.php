@@ -98,14 +98,24 @@ if ($text == "Toshkent" || $text == "Denov" || $text == "Nukus" ||
     file_put_contents(__DIR__ . '/weather.json', $weather_json);
 
 //    $weather_db = get_weather($conn, $weather['weather'][0]['id']);
+    $temp = round($weather['main']['temp']);
+    $feels_like = round($weather['main']['feels_like']);
+    $temp_min = round($weather['main']['temp_min']);
+    $temp_max = round($weather['main']['temp_max']);
+
+    if ($temp > 0) $temp = '+' . $temp;
+    if ($feels_like > 0) $feels_like = '+' . $feels_like;
+    if ($temp_min > 0) $temp_min = '+' . $temp_min;
+    if ($temp_max > 0) $temp_max = '+' . $temp_max;
+
     $reply = "<u>" . strtoupper($text) . " SHAHRI</u>:\n" .
         "\u{1F551} <b>Hisoblangan vaqt:</b> " . date('d/m/Y, H:i:s', $weather['dt']) . "\n" .
-        "\u{1F321} <b>Havo harorati:</b> " . "+" . round($weather['main']['temp']) . "\xE2\x84\x83\n" .
-        "\u{1F505} <b>O'xshaydi:</b> " . "+" . round($weather['main']['feels_like']) . "\xE2\x84\x83\n" .
-        "\u{1F4C9} <b>Minimum:</b> " . "+" . round($weather['main']['temp_min']) . "\xE2\x84\x83\n" .
-        "\u{1F4C8} <b>Maksimum:</b> " . "+" . round($weather['main']['temp_max']) . "\xE2\x84\x83\n" .
-        "\u{1F4A7} <b>Namlik:</b> " . $weather['main']['humidity'] . "%\n".
-        "\u{1F4A8} <b>Shamol tezligi:</b>". round($weather['wind']['speed']) . " m/s\n" .
+        "\u{1F321} <b>Havo harorati:</b> " . $temp . "\xE2\x84\x83\n" .
+        "\u{1F505} <b>O'xshaydi:</b> " . $feels_like . "\xE2\x84\x83\n" .
+        "\u{1F4C9} <b>Minimum:</b> " . $temp_min . "\xE2\x84\x83\n" .
+        "\u{1F4C8} <b>Maksimum:</b> " . $temp_max . "\xE2\x84\x83\n" .
+        "\u{1F4A7} <b>Namlik:</b> " . $weather['main']['humidity'] . "%\n" .
+        "\u{1F4A8} <b>Shamol tezligi:</b>" . round($weather['wind']['speed']) . " m/s\n" .
         "\u{2601} <b>Bulutlilik:</b> " . $weather['clouds']['all'] . " %\n" .
         "\u{26A0} <b>Havo bosimi:</b> " . round($weather['main']['pressure'] / 1.33322) . " mmHg\n";;
     isset($weather['main']['sea_level']) ? $reply .= "\u{26A0}<b>Havo bosimi (dengiz sathidan):</b> " . round($weather['main']['sea_level'] / 1.33322) . " mmHg\n" : '';
