@@ -116,10 +116,12 @@ if ($text == "Toshkent" || $text == "Denov" || $text == "Nukus" ||
         "\u{1F4C8} <b>Maksimum:</b> " . $temp_max . "\xE2\x84\x83\n" .
         "\u{1F4A7} <b>Namlik:</b> " . $weather['main']['humidity'] . "%\n" .
         "\u{1F4A8} <b>Shamol tezligi:</b>" . round($weather['wind']['speed']) . " m/s\n" .
-        "\u{2601} <b>Bulutlilik:</b> " . $weather['clouds']['all'] . " %\n" .
-        "\u{26A0} <b>Havo bosimi:</b> " . round($weather['main']['pressure'] / 1.33322) . " mmHg\n";;
-    isset($weather['main']['sea_level']) ? $reply .= "\u{26A0}<b>Havo bosimi (dengiz sathidan):</b> " . round($weather['main']['sea_level'] / 1.33322) . " mmHg\n" : '';
-    isset($weather['main']['grnd_level']) ? $reply .= "\u{26A0}<b>Havo bosimi (yer sathidan):</b> " . round($weather['main']['grnd_level'] / 1.33322) . " mmHg\n" : '';
+        "\u{2601}  <b>Bulutlilik:</b> " . $weather['clouds']['all'] . " %\n" .
+        "\u{26A0}  <b>Havo bosimi:</b> " . round($weather['main']['pressure'] / 1.33322) . " mmHg\n";;
+    isset($weather['main']['sea_level']) ? $reply .= "\u{26A0}  <b>Havo bosimi (dengiz sathidan):</b> "
+        . round($weather['main']['sea_level'] / 1.33322) . " mmHg\n" : '';
+    isset($weather['main']['grnd_level']) ? $reply .= "\u{26A0} <b>Havo bosimi (yer sathidan):</b> "
+        . round($weather['main']['grnd_level'] / 1.33322) . " mmHg\n" : '';
 
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'parse_mode' => 'HTML']);
 
